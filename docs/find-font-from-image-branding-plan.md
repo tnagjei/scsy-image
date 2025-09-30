@@ -40,3 +40,4 @@
 
 ## 进度记录
 - [x] 步骤1：创建工作分支 `feature/rebrand-find-font` 并同步远端最新提交（git fetch & merge）。
+- [x] 步骤2：更新 `messages/en.json`，全面替换品牌文案并改写首页、定价、FAQ 等描述以贴合 Find Font From Image。
