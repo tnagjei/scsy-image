@@ -37,3 +37,6 @@
 4. **法务与外部文档**：更新隐私政策、服务条款、`README.md`、`public/llms.txt` 等对外文本，使其与新定位匹配。
 5. **验证与巡检**：运行 `rg "AI Video"` 等命令确认旧品牌已清除，执行 `npm run lint`/`npm run build`，并逐页手动确认展示内容。
 6. **提交与记录**：整理变更说明，提交代码并记录尚需后续优化的文案或资源。
+
+## 进度记录
+- [x] 步骤1：创建工作分支 `feature/rebrand-find-font` 并同步远端最新提交（git fetch & merge）。
