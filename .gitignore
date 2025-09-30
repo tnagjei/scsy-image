@@ -38,3 +38,4 @@ next-env.d.ts
 
 # editor specific
 .claude/
+MERGE_PLAN.md
