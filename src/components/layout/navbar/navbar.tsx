@@ -71,12 +71,12 @@ const BasicNavbar = React.forwardRef<HTMLElement, NavbarProps>(
         <NavbarBrand>
           <img
             src="/logo.jpeg"
-            alt="logo"
+            alt="Find Font From Image logo"
             className="w-9 h-9 md:w-11 md:h-11 mr-2 mb-1 ml-1"
             loading="lazy"
           />
           <p className="text-2xl font-bold hidden lg:block text-blue-700">
-            AI Video Generator
+            Find Font From Image
           </p>
         </NavbarBrand>
 
@@ -129,7 +129,7 @@ const BasicNavbar = React.forwardRef<HTMLElement, NavbarProps>(
             <div className="flex flex-row gap-2">
               <button className="flex justify-center items-center gap-3 mr-6 hover:scale-110 transition-all duration-300">
                 <a href={`/${locale}/dashboard`}>
-                  My creations
+                  My font matches
                   {/* <Icon
                     icon="lucide:settings-2"
                     className="w-[1.3em] h-[1.3em] text-black"
@@ -191,7 +191,7 @@ const BasicNavbar = React.forwardRef<HTMLElement, NavbarProps>(
             <div className="flex flex-row gap-2">
               <button className="flex justify-center items-center gap-3 mr-6 hover:scale-110 transition-all duration-300 pt-2">
                 <a href={`/${locale}/dashboard`}>
-                  My creations
+                  My font matches
                   {/* <Icon
                     icon="lucide:settings-2"
                     className="w-[1.3em] h-[1.3em] text-black"

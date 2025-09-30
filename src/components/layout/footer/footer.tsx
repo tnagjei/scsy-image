@@ -54,12 +54,12 @@ export default function Footer({ locale }: { locale: string }) {
             <div className="flex items-center justify-center xl:justify-start">
               <img
                 src="/logo.jpeg"
-                alt="AI Video Generator"
+                alt="Find Font From Image"
                 className="w-8 h-8 mr-2"
                 loading="lazy"
               />
               <span className="text-medium font-medium">
-                AI Video Generator
+                Find Font From Image
               </span>
             </div>
             <p className="text-small text-black text-center xl:text-left">
@@ -132,7 +132,7 @@ export default function Footer({ locale }: { locale: string }) {
         <Divider className="mt-16 sm:mt-20 lg:mt-24" />
         <div className="flex justify-center pt-8">
           <p className="text-small text-black">
-            &copy; 2025 AI Video Generator. All rights reserved.
+            &copy; 2025 Find Font From Image. All rights reserved.
           </p>
         </div>
       </div>

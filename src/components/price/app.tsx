@@ -106,7 +106,7 @@ export default function Pricing() {
       </div>
       <div className="flex max-w-4xl flex-col text-center">
         <h2 className="text-3xl md:text-4xl font-extrabold text-blue-600 text-center">
-          Pick Your Best Plan of AI Video Generator
+          Pick Your Best Plan for Find Font From Image
         </h2>
         <Spacer y={4} />
       </div>

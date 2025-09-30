@@ -5,7 +5,7 @@ const text = `
 
 
 
-Welcome to AI Video Generator. Your privacy is important to us, and we are committed to protecting the information you share with us. This Privacy Policy outlines how we collect, use, disclose, and safeguard your data when you visit our website or use our services.
+Welcome to Find Font From Image. Your privacy is important to us, and we are committed to protecting the information you share with us. This Privacy Policy outlines how we collect, use, disclose, and safeguard your data when you visit our website or use our services.
 
 
 ## 1. Information We Collect
@@ -17,7 +17,7 @@ We may collect the following types of information:
 - Payment information for subscription or purchases (handled securely via third-party payment processors).
 
 ### 1.2 Uploaded Data
-- Photos and videos you upload to generate AI content. **Note:** We do not save or store uploaded media after processing unless explicitly agreed upon by you.
+- Images you upload for font identification. **Note:** We do not save or store uploaded media after processing unless explicitly agreed upon by you.
 
 ### 1.3 Automatically Collected Information
 - **Log Data**: IP address, browser type, operating system, and timestamps.
@@ -97,7 +97,7 @@ If you have any questions or concerns about this Privacy Policy or your personal
 **Email**: support@${getDomain().replace("https://", "")}
 
 
-By using AI Video Generator, you agree to the terms of this Privacy Policy. If you do not agree, please refrain from using our services.
+By using Find Font From Image, you agree to the terms of this Privacy Policy. If you do not agree, please refrain from using our services.
 
 
 
