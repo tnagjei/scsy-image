@@ -5,6 +5,7 @@ import { Button, Card, CardBody } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import DeleteButton from "@/components/button/delete-button";
 import { toast } from "sonner";
+import { useAppContext } from "@/contexts/app";
 
 export default function FontIdentifier(props: {
   lang: string;
@@ -17,6 +18,7 @@ export default function FontIdentifier(props: {
   const [image, setImage] = useState<string | null>(null);
   const [analyzing, setAnalyzing] = useState<boolean>(false);
   const [result, setResult] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -53,36 +55,44 @@ export default function FontIdentifier(props: {
     }
 
     setAnalyzing(true);
+    setError(null);
+    
     try {
-      // 这里应该调用字体识别API
-      // 目前模拟分析过程
-      await new Promise(resolve => setTimeout(resolve, 3000));
+      // 将base64图像转换为Blob
+      const response = await fetch(image);
+      const blob = await response.blob();
+      const imageFile = new File([blob], "font-image.jpg", { type: blob.type });
 
-      // 模拟识别结果
-      setResult({
-        fonts: [
-          {
-            name: "Helvetica Neue",
-            confidence: 0.95,
-            foundry: "Linotype",
-            license: "Commercial",
-            similar_fonts: ["Arial", "Swiss 721"]
-          },
-          {
-            name: "Open Sans",
-            confidence: 0.87,
-            foundry: "Google Fonts",
-            license: "Open Source",
-            similar_fonts: ["Roboto", "Lato"]
-          }
-        ],
-        text_detected: "Sample text detected in image"
+      const formData = new FormData();
+      formData.append("image", imageFile);
+      
+      // 可选：添加用户ID用于追踪
+      if (user?.uuid) {
+        formData.append("user_id", user.uuid);
+        formData.append("user_email", user.email || "");
+      }
+
+      const apiResponse = await fetch("/api/font-identify", {
+        method: "POST",
+        body: formData,
       });
 
-      toast.success("字体识别完成！");
-    } catch (error) {
+      if (!apiResponse.ok) {
+        throw new Error(`API请求失败: ${apiResponse.status}`);
+      }
+
+      const apiData = await apiResponse.json();
+
+      if (apiData.success) {
+        setResult(apiData.data);
+        toast.success("字体识别完成！");
+      } else {
+        throw new Error(apiData.error || "识别失败");
+      }
+    } catch (error: any) {
       console.error("字体识别失败:", error);
-      toast.error("字体识别失败，请重试");
+      setError(error.message || "识别失败，请重试");
+      toast.error(error.message || "字体识别失败");
     } finally {
       setAnalyzing(false);
     }
