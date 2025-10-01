@@ -9,7 +9,7 @@ export async function generateMetadata({
   return await getMetadata(params?.locale || "", "Pricing.seo", "pricing");
 }
 
-export default function () {
+export default function PricingPage() {
   return (
     <div className="flex flex-col items-center px-3 md:px-0 mb-24 pt-16 md:pt-24">
       <div className="flex flex-col items-center w-full max-w-7xl mx-10">
