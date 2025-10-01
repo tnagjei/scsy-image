@@ -25,13 +25,13 @@ export default function FontIdentifier(props: {
     if (file) {
       // 验证文件类型
       if (!file.type.startsWith('image/')) {
-        toast.error("请选择图片文件");
+        toast.error("Please select an image file");
         return;
       }
 
       // 验证文件大小 (最大10MB)
       if (file.size > 10 * 1024 * 1024) {
-        toast.error("图片大小不能超过10MB");
+        toast.error("Image size cannot exceed 10MB");
         return;
       }
 
@@ -50,7 +50,7 @@ export default function FontIdentifier(props: {
 
   const handleAnalyze = async () => {
     if (!image) {
-      toast.warning("请先上传图片");
+      toast.warning("Please upload an image first");
       return;
     }
 
@@ -109,7 +109,7 @@ export default function FontIdentifier(props: {
                 {t("input.title")}
               </h2>
               <p className="text-gray-600">
-                上传包含文本的图片，AI将在几秒内识别字体
+                Upload an image containing text, AI will identify the font in seconds
               </p>
             </div>
 
@@ -141,8 +141,8 @@ export default function FontIdentifier(props: {
                       />
                     </svg>
                     <span className="text-sm text-gray-500 text-center">
-                      点击或拖拽上传图片<br />
-                      支持 JPG、PNG 格式，大小不超过10MB
+                      Click or drag to upload image<br />
+                      Supports JPG, PNG format, up to 10MB
                     </span>
                   </div>
                 )}
@@ -164,11 +164,11 @@ export default function FontIdentifier(props: {
               isLoading={analyzing}
               disabled={!image}
             >
-              {analyzing ? "正在识别字体..." : "开始识别字体"}
+              {analyzing ? "Analyzing fonts..." : "Start Font Identification"}
             </Button>
 
             <div className="text-sm text-gray-500 text-center">
-              💡 提示：上传清晰度高的图片可获得更准确的识别结果
+              💡 Tip: Upload high-clarity images for more accurate results
             </div>
           </div>
 
@@ -176,7 +176,7 @@ export default function FontIdentifier(props: {
           <div className="space-y-4">
             <div className="text-center">
               <h3 className="text-xl font-bold text-gray-800 mb-2">
-                识别结果
+                Identification Results
               </h3>
             </div>
 
@@ -186,7 +186,7 @@ export default function FontIdentifier(props: {
                   <svg className="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
-                  <p>上传图片后将显示字体识别结果</p>
+                  <p>Upload image to view font identification results</p>
                 </div>
               </div>
             )}
@@ -195,7 +195,7 @@ export default function FontIdentifier(props: {
               <div className="flex items-center justify-center h-64 bg-blue-50 border-2 border-dashed border-blue-300 rounded-xl">
                 <div className="text-center text-blue-600">
                   <div className="animate-spin w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full mx-auto mb-2"></div>
-                  <p>准备就绪，点击按钮开始识别</p>
+                  <p>Ready, click button to start identification</p>
                 </div>
               </div>
             )}
@@ -204,8 +204,8 @@ export default function FontIdentifier(props: {
               <div className="flex items-center justify-center h-64 bg-blue-50 border-2 border-dashed border-blue-300 rounded-xl">
                 <div className="text-center text-blue-600">
                   <div className="animate-spin w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full mx-auto mb-2"></div>
-                  <p className="font-semibold">AI正在分析图片...</p>
-                  <p className="text-sm mt-1">预计需要几秒钟时间</p>
+                  <p className="font-semibold">AI is analyzing the image...</p>
+                  <p className="text-sm mt-1">Expected to take a few seconds</p>
                 </div>
               </div>
             )}
@@ -213,9 +213,9 @@ export default function FontIdentifier(props: {
             {result && (
               <div className="space-y-4">
                 <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-                  <h4 className="font-semibold text-green-800 mb-2">✅ 识别成功</h4>
+                  <h4 className="font-semibold text-green-800 mb-2">✅ Identification Successful</h4>
                   <p className="text-sm text-green-700">
-                    检测到文本："{result.text_detected}"
+                    Detected text: "{result.text_detected}"
                   </p>
                 </div>
 
@@ -235,17 +235,17 @@ export default function FontIdentifier(props: {
 
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
-                          <span className="font-medium">字体厂商：</span>
+                          <span className="font-medium">Font Foundry:</span>
                           {font.foundry}
                         </div>
                         <div>
-                          <span className="font-medium">许可类型：</span>
+                          <span className="font-medium">License Type:</span>
                           {font.license}
                         </div>
                       </div>
 
                       <div className="mt-3">
-                        <span className="font-medium text-sm">相似字体：</span>
+                        <span className="font-medium text-sm">Similar Fonts:</span>
                         <div className="flex flex-wrap gap-1 mt-1">
                           {font.similar_fonts.map((similar: string, idx: number) => (
                             <span key={idx} className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs">
@@ -260,10 +260,10 @@ export default function FontIdentifier(props: {
 
                 <div className="flex gap-2">
                   <Button color="primary" variant="flat" className="flex-1">
-                    下载字体包
+                    Download Font Package
                   </Button>
                   <Button color="secondary" variant="flat" className="flex-1">
-                    复制CSS代码
+                    Copy CSS Code
                   </Button>
                 </div>
               </div>
