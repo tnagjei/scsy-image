@@ -94,7 +94,7 @@ const BasicNavbar = React.forwardRef<HTMLElement, NavbarProps>(
               {t("home")}
             </Link>
           </NavbarItem>
-          <NavbarItem onClick={() => handleTagClick("pricing")}>
+          <NavbarItem onClick={() => handleTagClick("text-to-image")}>
             <Link
               className={cn(
                 "text-black mx-4",

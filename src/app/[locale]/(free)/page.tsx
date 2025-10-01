@@ -1,4 +1,4 @@
-import WorkerWrapper from "@/components/replicate/img-to-video/worker-wraper";
+import FontIdentifier from "@/components/font-identification/font-identifier";
 import TopHero from "@/components/landingpage/top";
 import What from "@/components/landingpage/what";
 import How from "@/components/landingpage/how";
@@ -40,7 +40,7 @@ export default function Home({
   const whatImage = "/resources/example3.webp";
   const howImage = "/resources/example2.webp";
 
-  const effectId = "1";
+  const effectId = "2";
   const multiLanguage = "HomePage";
   const multiLanguageOfGenerator = "HomePage.generator";
 
@@ -50,10 +50,12 @@ export default function Home({
         <TopHero multiLanguage={multiLanguage} locale={locale} />
       </div>
       <div className="w-full flex justify-center items-center pt-3 mb-8">
-        <WorkerWrapper
-          effectId={effectId}
-          promotion={video}
+        <FontIdentifier
           lang={multiLanguageOfGenerator}
+          credit={1}
+          model="font-detection-model"
+          version="1.0"
+          effect_link_name="font-identifier"
         />
       </div>
       <div className="pt-20 md:pt-40">
