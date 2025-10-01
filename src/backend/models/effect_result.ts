@@ -1,37 +1,72 @@
 import { getDb } from "../config/db";
 import { EffectResult } from "../type/type";
 
+// 通用数据库查询错误处理辅助函数
+async function handleDbQuery<T>(operation: string, queryFn: () => Promise<T>): Promise<T> {
+  try {
+    return await queryFn();
+  } catch (error) {
+    console.error(`${operation}失败:`, error);
+    if (process.env.NODE_ENV === 'development') {
+      throw error;
+    }
+    throw new Error(`${operation}失败，请稍后重试`);
+  }
+}
+
 export async function create(effectResult: EffectResult) {
-  const db = await getDb();
-  const res = await db.query(
-    `INSERT INTO effect_result (result_id, original_id, user_id, effect_id, effect_name, prompt, url, original_url, storage_type, running_time, credit, request_params, status, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *`,
-    [
-      effectResult.result_id,
-      effectResult.original_id,
-      effectResult.user_id,
-      effectResult.effect_id,
-      effectResult.effect_name,
-      effectResult.prompt,
-      effectResult.url,
-      effectResult.original_url,
-      effectResult.storage_type,
-      effectResult.running_time,
-      effectResult.credit,
-      effectResult.request_params,
-      effectResult.status,
-      effectResult.created_at,
-    ]
-  );
-  return res.rows[0];
+  try {
+    if (!effectResult || typeof effectResult !== 'object') {
+      throw new Error('效果结果对象不能为空');
+    }
+
+    if (!effectResult.user_id || !effectResult.effect_id) {
+      throw new Error('效果结果基本信息不完整 (user_id, effect_id 为必填项)');
+    }
+
+    const db = getDb();
+    const res = await db.query(
+      `INSERT INTO effect_result (result_id, original_id, user_id, effect_id, effect_name, prompt, url, original_url, storage_type, running_time, credit, request_params, status, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *`,
+      [
+        effectResult.result_id,
+        effectResult.original_id,
+        effectResult.user_id,
+        effectResult.effect_id,
+        effectResult.effect_name,
+        effectResult.prompt,
+        effectResult.url,
+        effectResult.original_url,
+        effectResult.storage_type,
+        effectResult.running_time,
+        effectResult.credit,
+        effectResult.request_params,
+        effectResult.status,
+        effectResult.created_at,
+      ]
+    );
+    return res.rows[0];
+  } catch (error) {
+    console.error('创建效果结果失败:', error);
+    if (process.env.NODE_ENV === 'development') {
+      throw error;
+    }
+    throw new Error('保存效果结果失败，请稍后重试');
+  }
 }
 
 export async function getByResultIdAndUserId(resultId: string, userId: string) {
-  const db = await getDb();
-  const res = await db.query(
-    `SELECT * FROM effect_result WHERE result_id = $1 AND user_id = $2`,
-    [resultId, userId]
-  );
-  return res.rows[0];
+  return handleDbQuery('查询效果结果', async () => {
+    if (!resultId || !userId) {
+      throw new Error('resultId 和 userId 参数不能为空');
+    }
+
+    const db = getDb();
+    const res = await db.query(
+      `SELECT * FROM effect_result WHERE result_id = $1 AND user_id = $2`,
+      [resultId, userId]
+    );
+    return res.rows[0] || null;
+  });
 }
 
 export async function pageListByUserId(
